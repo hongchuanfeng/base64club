@@ -168,6 +168,72 @@
             padding: 0 1rem;
         }
 
+        /* Hero banner */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(90deg, #f7fbff 0%, #f5fff8 100%);
+            border: 1px solid #e9f1ff;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin: 12px 0 20px;
+        }
+        .hero-badge { background: #e8f3ff; color:#0b65d8; border-radius: 8px; padding: 6px 10px; font-weight:700; font-size:12px; }
+        .hero-text { color:#455a64; font-size:14px; }
+
+        /* Form layout enhancements */
+        .container .formLine {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #ffffff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin: 12px 0;
+        }
+        .container .formLine .l { min-width: 90px; color:#546e7a; font-weight: 600; }
+        .container .formLine .r p { margin: 0; color:#455a64; }
+        .container input[type="file"] { padding: 8px; border: 1px dashed #cfd8dc; border-radius: 8px; background:#fbfdff; }
+        .container input[type="checkbox"],
+        .container input[type="radio"] { accent-color: #0b65d8; }
+
+        /* Primary button */
+        #b {
+            background: #0b65d8;
+            color: #fff;
+            border: 1px solid #0a5ac3;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 14px;
+            cursor: pointer;
+            min-width: 140px;
+            transition: background .25s ease, transform .1s ease, box-shadow .25s ease;
+        }
+        #b:hover { background:#0a5ac3; box-shadow: 0 6px 16px rgba(11,101,216,.18); }
+        #b:active { transform: translateY(1px); }
+        #b:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(11,101,216,.35); }
+
+        /* Preview area */
+        #imageContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+            /* 透明背景棋盘格，便于查看透明区 */
+            background-image:
+                linear-gradient(45deg, #f0f3f7 25%, transparent 25%),
+                linear-gradient(-45deg, #f0f3f7 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f0f3f7 75%),
+                linear-gradient(-45deg, transparent 75%, #f0f3f7 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        #imageContainer img { border: 1px solid #e0e0e0; border-radius: 10px; padding: 6px; background:#fff; }
+
         /* 工具卡片布局 */
         .tools-grid {
             display: grid;
@@ -259,7 +325,7 @@
         <button class="menu-btn" onclick="toggleMenu()">☰</button>
         <div class="nav-categories">
             <a href="../../index.html" class="nav-category">🔐 Base64</a>
-            <a href="../../common.html" class="nav-category">🔍 common</a>
+            <a href="../../common.html" class="nav-category">🔍 Common</a>
             <a href="../../life.html" class="nav-category">🏠 Life Tools</a>
             <a href="../../encry.html" class="nav-category">🔒 Encryption</a>
             <a href="../../code.html" class="nav-category">📝 Encoding</a>
@@ -271,6 +337,12 @@
 </nav>
 
 <h1 style="text-align: center">Free Image to Icon Converter</h1>
+<div class="container">
+    <div class="hero" role="note" aria-label="Intro">
+        <span class="hero-badge">Image Tools</span>
+        <span class="hero-text">Convert images to multi‑size .ico icons. Client‑side only — your files never leave the browser.</span>
+    </div>
+</div>
 
 <div class="container">
     <form id="form">
@@ -380,20 +452,100 @@
         const imageInput = document.getElementById('imageInput');
         const imageContainer = document.getElementById('imageContainer');
 
-        imageInput.addEventListener('change', function (event) {
+        if (!imageInput || !imageContainer) return;
+
+        const onChange = function (event) {
             const file = event.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
+                if (!file.type.startsWith('image/')) {
+                    alert('Please choose an image file');
+                    return;
+                }
+
+                const objectUrl = URL.createObjectURL(file);
+                    // 清空旧预览
+                    imageContainer.innerHTML = '';
+
+                    // 新图片
                     const img = document.createElement('img');
-                    img.src = e.target.result;
+                    img.src = objectUrl;
+                    img.alt = 'Preview';
                     img.style.maxWidth = '100%';
+                    img.onload = () => URL.revokeObjectURL(objectUrl);
                     imageContainer.appendChild(img);
 
+                    // 文件信息
+                    const info = document.createElement('div');
+                    info.style.color = '#607d8b';
+                    info.style.fontSize = '12px';
+                    info.textContent = `${file.name}  ·  ${(file.size/1024).toFixed(1)} KB`;
+                    imageContainer.appendChild(info);
 
+                    // 生成各尺寸缩略图预览（按已勾选尺寸）
+                    const thumbWrap = document.createElement('div');
+                    thumbWrap.style.gridColumn = '1 / -1';
+                    thumbWrap.style.display = 'grid';
+                    thumbWrap.style.gridTemplateColumns = 'repeat(auto-fit, minmax(120px, 1fr))';
+                    thumbWrap.style.gap = '12px';
+
+                    const baseImg = new Image();
+                    baseImg.src = objectUrl;
+                    baseImg.onload = () => {
+                        const sizes = [];
+                        for (const i of f.size) { if (i.checked) sizes.push(parseInt(i.value)); }
+                        if (sizes.length === 0) sizes.push(96);
+                        sizes.sort((a,b)=>a-b);
+
+                        sizes.forEach((size)=>{
+                            const cell = document.createElement('div');
+                            cell.style.display = 'flex';
+                            cell.style.flexDirection = 'column';
+                            cell.style.alignItems = 'center';
+                            cell.style.gap = '6px';
+
+                            const canvas = document.createElement('canvas');
+                            canvas.width = size; canvas.height = size;
+                            const ctx = canvas.getContext('2d');
+                            ctx.clearRect(0,0,size,size);
+
+                            // 等比缩放居中绘制
+                            const scale = Math.min(size / baseImg.width, size / baseImg.height);
+                            const w = Math.round(baseImg.width * scale);
+                            const h = Math.round(baseImg.height * scale);
+                            const dx = Math.round((size - w) / 2);
+                            const dy = Math.round((size - h) / 2);
+                            ctx.imageSmoothingEnabled = true;
+                            ctx.imageSmoothingQuality = 'high';
+                            ctx.drawImage(baseImg, dx, dy, w, h);
+
+                            const label = document.createElement('div');
+                            label.style.fontSize = '12px';
+                            label.style.color = '#607d8b';
+                            label.textContent = `${size}x${size}`;
+
+                            cell.appendChild(canvas);
+                            cell.appendChild(label);
+                            thumbWrap.appendChild(cell);
+                        });
+
+                        imageContainer.appendChild(thumbWrap);
+                    };
+                baseImg.onerror = () => {
+                    // 如果 objectURL 渲染失败，回退到 FileReader
+                    const reader = new FileReader();
+                    reader.onload = (e2) => {
+                        img.src = e2.target.result;
+                    };
+                    reader.readAsDataURL(file);
                 };
-                reader.readAsDataURL(file);
             }
+        };
+
+        imageInput.addEventListener('change', onChange);
+        // 兜底：若有其他 file 输入，亦绑定
+        const fileInputs = document.querySelectorAll('input[type="file"][name="file"]');
+        fileInputs.forEach(inp => {
+            if (inp !== imageInput) inp.addEventListener('change', onChange);
         });
     }
     showImg();

@@ -204,6 +204,45 @@
             padding-left: 1rem;
         }
 
+        /* UI enhancements */
+        .upload-area {
+            border: 2px dashed #cfd8dc;
+            border-radius: 12px !important;
+            background: #fbfdff;
+            color: #546e7a;
+            cursor: pointer;
+            transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+        }
+        .upload-area:hover { border-color: #90caf9; background: #f5faff; box-shadow: 0 4px 14px rgba(13,110,253,.12); }
+
+        .settings.card { border-radius: 12px; border: 1px solid #eef2f7; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+        .settings-group h3 { color: #334155; }
+        .form-label { color: #607d8b; font-weight: 600; }
+
+        .preview-container { background: #fff; border: 1px solid #eef2f7; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+        .preview-image { border-radius: 8px; border: 1px solid #eceff1; }
+
+        .pixel-grid {
+            min-height: 240px;
+            border-radius: 10px;
+            border: 1px solid #eceff1;
+            background-image:
+                linear-gradient(45deg, #f0f3f7 25%, transparent 25%),
+                linear-gradient(-45deg, #f0f3f7 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f0f3f7 75%),
+                linear-gradient(-45deg, transparent 75%, #f0f3f7 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+        }
+
+        .btn-primary { box-shadow: 0 2px 6px rgba(13,110,253,.18); }
+        .btn-primary:hover { box-shadow: 0 6px 16px rgba(13,110,253,.25); }
+
+        /* Hero */
+        .hero { display:flex; align-items:center; gap:12px; background: linear-gradient(90deg,#f7fbff 0%, #f5fff8 100%); border:1px solid #e9f1ff; border-radius:10px; padding:12px 14px; margin:12px 0 20px; }
+        .hero-badge { background:#e8f3ff; color:#0b65d8; border-radius:8px; padding:6px 10px; font-weight:700; font-size:12px; }
+        .hero-text { color:#455a64; font-size:14px; }
+
         /* 移动端样式 */
         @media (max-width: 768px) {
             .nav-categories {
@@ -276,6 +315,10 @@
 
 <h1 style="text-align: center">Image to Excel</h1>
 <div class="container">
+    <div class="hero" role="note" aria-label="Intro">
+        <span class="hero-badge">Image Tools</span>
+        <span class="hero-text">Convert images to Excel art locally in your browser. No uploads, privacy‑friendly.</span>
+    </div>
     <p class="text-center mb-4" style="line-height: 1.6; color: mediumvioletred; ">Convert images into Excel art. Adjust brightness, contrast, and more to create pixel-style spreadsheets.</p>
     <div class="row">
         <div class="col-md-4">
