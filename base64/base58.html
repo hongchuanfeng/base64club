@@ -8,6 +8,7 @@
 	<meta name="description" content="Encode or decode Base64 strings. Works with UTF-8 text and runs locally in your browser.">		
 	<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+	<link rel="canonical" href="https://www.base64.club/base64/base58.html">
 	<style>
 		* {
 			margin: 0;
@@ -303,6 +304,17 @@
 		</div>
 
 		<div id="b58_error" style="color:#b91c1c; font-size:12px; min-height: 16px;"></div>
+
+		<div class="about-base64" style="margin-top:12px;">
+			<h2>How Base58 works</h2>
+			<ul>
+				<li>Alphabet: 58 symbols excluding visually ambiguous characters (0, O, I, l).</li>
+				<li>Encoding: treat bytes as a big base-256 integer, convert to base-58 with repeated division.</li>
+				<li>Leading zeros: each leading 0x00 byte becomes a leading '1' in Base58 output.</li>
+				<li>Decoding: reverse the process by accumulating base-58 digits back to base-256 bytes.</li>
+				<li>Usage: popular in Bitcoin addresses; note Base58 is a representation, not encryption.</li>
+			</ul>
+		</div>
 	</div>
 
 </div>

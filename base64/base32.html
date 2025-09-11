@@ -8,6 +8,7 @@
 	<meta name="description" content="Encode or decode Base64 strings. Works with UTF-8 text and runs locally in your browser.">		
 	<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+	<link rel="canonical" href="https://www.base64.club/base64/base32.html">
 	<style>
 		* {
 			margin: 0;
@@ -303,6 +304,17 @@
 		</div>
 
 		<div id="b32_error" style="color:#b91c1c; font-size:12px; min-height: 16px;"></div>
+
+		<div class="about-base64" style="margin-top:12px;">
+			<h2>How Base32 works</h2>
+			<ul>
+				<li>Grouping: input bytes are processed into 5-bit groups; every 5 bits map to one character.</li>
+				<li>Alphabet: RFC 4648 uses A–Z and 2–7 (32 symbols); output is uppercase by spec.</li>
+				<li>Padding: output length is a multiple of 8; <code>=</code> is appended when needed.</li>
+				<li>Whitespace: spaces/newlines are often ignored during decoding.</li>
+				<li>Purpose: representation for text channels; not encryption or compression.</li>
+			</ul>
+		</div>
 	</div>
 
 </div>

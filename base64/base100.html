@@ -8,6 +8,7 @@
 	<meta name="description" content="Encode or decode Base64 strings. Works with UTF-8 text and runs locally in your browser.">		
 	<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+	<link rel="canonical" href="https://www.base64.club/base64/base100.html">
 	<style>
 		* {
 			margin: 0;
@@ -303,6 +304,17 @@
 		</div>
 
 		<div id="b100_error" style="color:#b91c1c; font-size:12px; min-height: 16px;"></div>
+	</div>
+
+	<div class="about-base64" style="margin-top:12px;">
+		<h2>How Base100 works</h2>
+		<ul>
+			<li>Alphabet: two-digit numbers 00–99 act as the 100 symbols (base‑100 digits).</li>
+			<li>Encoding: interpret input bytes as a big base‑256 integer, then repeatedly divide by 100 to get digits.</li>
+			<li>Formatting: each digit is printed as two digits with leading zero (e.g., 3 → 03), typically space‑separated.</li>
+			<li>Decoding: parse two‑digit tokens (00–99), accumulate back in base‑100, then convert the integer to bytes.</li>
+			<li>Note: This is a textual representation for transport/debugging; it is not encryption or compression.</li>
+		</ul>
 	</div>
 
 </div>

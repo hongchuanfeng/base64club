@@ -8,6 +8,7 @@
 	<meta name="description" content="Encode or decode Base64 strings. Works with UTF-8 text and runs locally in your browser.">	
 	<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+	<link rel="canonical" href="https://www.base64.club/base64/base64.html">
 	<style>
 		* {
 			margin: 0;
@@ -299,6 +300,16 @@
 			<button id="encodeBtn">Encode → Base64</button>
 			<button id="decodeBtn">Decode ← Base64</button>
 			<button id="swapBtn" style="background:#2196F3; color:#fff;">Swap</button>
+		</div>
+
+		<div class="about-base64">
+			<h2>How Base64 works</h2>
+			<ul>
+				<li>Grouping: every 3 bytes (24 bits) are split into 4 groups of 6 bits.</li>
+				<li>Alphabet: each 6-bit value maps to one character from A–Z, a–z, 0–9, +, /.</li>
+				<li>Padding: if input length is not a multiple of 3, pad with 0 bits and append = or ==.</li>
+				<li>Text safety: Base64 is for transporting binary over text channels; it is not encryption.</li>
+			</ul>
 		</div>
 
 		<div id="b64_error" style="color:#b91c1c; font-size:12px; min-height: 16px;"></div>

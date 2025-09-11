@@ -8,6 +8,7 @@
 	<meta name="description" content="Encode or decode Base64 strings. Works with UTF-8 text and runs locally in your browser.">			
 	<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+	<link rel="canonical" href="https://www.base64.club/base64/baseCust.html">
 	<style>
 		* {
 			margin: 0;
@@ -322,6 +323,16 @@
 		</div>
 
 		<div id="b64c_error" style="color:#b91c1c; font-size:12px; min-height: 16px;"></div>
+		<div class="about-base64" style="margin-top:12px;">
+			<h2>How custom Base mapping works</h2>
+			<ul>
+				<li>Alphabet: choose any 64 unique characters as the Base64 alphabet (standard is A–Z, a–z, 0–9, +, /).</li>
+				<li>Remapping: this tool remaps characters from the source alphabet to the target alphabet 1‑to‑1, without re‑encoding the payload.</li>
+				<li>Padding: <code>=</code> can be kept, changed to another symbol, or removed entirely; both sides must agree.</li>
+				<li>Compatibility: custom alphabets are not interoperable with standard Base64 unless the receiver knows your alphabet and padding rules.</li>
+				<li>Safety: this is a textual substitution layer over Base64; it does not add encryption or integrity by itself.</li>
+			</ul>
+		</div>
 	</div>
 
 </div>
