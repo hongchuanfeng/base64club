@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Base64 Encoding Comparison Table	- Base64 Tools</title>
+	<title>Base64 Encoding Comparison Table	- Base64 Tools - Free Online Base64 Tool: Image to Base64/SQL Base64/Multi-format Decoding</title>
 	<meta name="keywords" content="Base64, encode, decode, Chuandao Tools">
 	<meta name="description" content="Encode or decode Base64 strings. Works with UTF-8 text and runs locally in your browser.">		
 	<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
@@ -153,6 +153,20 @@
 			color: #007bff;
 		}
 
+		/* 为不同的Base编码图标设置不同颜色 */
+		.nav-category[href*="base32"] {
+			filter: hue-rotate(120deg) saturate(1.5);
+		}
+		.nav-category[href*="base58"] {
+			filter: hue-rotate(60deg) saturate(1.5);
+		}
+		.nav-category[href*="base62"] {
+			filter: hue-rotate(0deg) saturate(1.5);
+		}
+		.nav-category[href*="base85"] {
+			filter: hue-rotate(280deg) saturate(1.5);
+		}
+
 		.menu-btn {
 			display: none;
 			background: none;
@@ -211,6 +225,9 @@
 				flex-direction: column;
 				padding: 1rem;
 				box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+				z-index: 1000;
+				max-height: 80vh;
+				overflow-y: auto;
 			}
 
 			.nav-categories.active {
@@ -220,6 +237,7 @@
 			.nav-category {
 				padding: 0.5rem 0;
 				text-decoration: none;
+				font-size: 14px;
 			}
 
 			.menu-btn {
@@ -228,6 +246,11 @@
 
 			nav {
 				padding: 1rem;
+			}
+
+			.logo img {
+				width: 80px !important;
+				margin-right: 20px !important;
 			}
 		}
 	</style>
@@ -256,14 +279,18 @@
 		</div>
 		<button class="menu-btn" onclick="toggleMenu()">☰</button>
 		<div class="nav-categories">
-			<a href="../index.html" class="nav-category">🔐 Base64</a>
-            <a href="../common.html" class="nav-category">🔍 Common</a>
-			<a href="../life.html" class="nav-category">🏠 Life</a>
-			<a href="../encry.html" class="nav-category">🔒 Crypto</a>
-			<a href="../code.html" class="nav-category">📝 Encode/Decode</a>
-			<a href="../dev.html" class="nav-category">💻 Developer</a>
-			<a href="../image.html" class="nav-category">🖼️ Image</a>
-			<a href="../game.html" class="nav-category">🎮 Fun</a>
+			<a href="../index.html" class="nav-category">🏠 Home</a>
+			<a href="base64Intro.html" class="nav-category">📚 Base64 Principle</a>
+			<a href="base64.html" class="nav-category">🔐 Base64 Encode/Decode</a>
+			<a href="image2base64.html" class="nav-category">🖼️ Base64/Image</a>
+			<a href="base16.html" class="nav-category">🔟 Base16</a>
+			<a href="base32.html" class="nav-category">🔤 Base32</a>
+			<a href="base58.html" class="nav-category">🔡 Base58</a>
+			<a href="base62.html" class="nav-category">🔠 Base62</a>
+			<a href="base85.html" class="nav-category">🔣 Base85</a>
+			<a href="base100.html" class="nav-category">💯 Base100</a>
+			<a href="base64SQL.html" class="nav-category">🗃️ SQL Base64</a>
+			<a href="../cn/base64/base64List.html" class="nav-category" id="lang-switch">🌐 中文</a>
 		</div>
 	</div>
 </nav>
@@ -326,13 +353,68 @@
 
 </div>
 
+<!-- Footer -->
+<footer style="background-color: #f8f9fa; padding: 2rem 0; margin-top: 3rem; border-top: 1px solid #e9ecef;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+            <!-- About Us -->
+            <div>
+                <h4 style="color: #333; margin-bottom: 1rem; font-size: 1.1rem;">About Us</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.5rem;">
+                    <strong>Company:</strong>Chuandao AI
+                </p>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.5rem;">
+                    <strong>Address:</strong>Minzhi Street, Longhua District, Shenzhen
+                </p>
+                <p style="color: #666; line-height: 1.6;">
+                    We are committed to providing high-quality online tool services and convenient Base64 encoding/decoding and other practical functions for users.
+                </p>
+            </div>
+            
+            <!-- Contact Us -->
+            <div>
+                <h4 style="color: #333; margin-bottom: 1rem; font-size: 1.1rem;">Contact Us</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.5rem;">
+                    <strong>Email:</strong><a href="mailto:hcf@foxmail.com" style="color: #007bff; text-decoration: none;">hcf@foxmail.com</a>
+                </p>
+                <p style="color: #666; line-height: 1.6;">
+                    If you have any questions or suggestions, please feel free to contact us via email. We will reply to your email within 24 hours.
+                </p>
+            </div>
+            
+            <!-- Privacy Policy -->
+            <div>
+                <h4 style="color: #333; margin-bottom: 1rem; font-size: 1.1rem;">Privacy Policy</h4>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 0.5rem;">
+                    We value your privacy protection and promise:
+                </p>
+                <ul style="color: #666; line-height: 1.6; padding-left: 1.2rem;">
+                    <li>Not to collect your personal sensitive information</li>
+                    <li>All data processing is done locally</li>
+                    <li>Not to use your data for commercial purposes</li>
+                    <li>Strictly comply with relevant laws and regulations</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Copyright Information -->
+        <div style="text-align: center; padding-top: 1.5rem; border-top: 1px solid #e9ecef;">
+            <p style="color: #999; font-size: 0.9rem; margin: 0;">
+                © 2024 Chuandao AI. All rights reserved. | 
+                <a href="../privacy.html" style="color: #007bff; text-decoration: none; margin: 0 0.5rem;">Privacy Policy</a> | 
+                <a href="../about.html" style="color: #007bff; text-decoration: none; margin: 0 0.5rem;">About Us</a> | 
+                <a href="../about.html#contact" style="color: #007bff; text-decoration: none; margin: 0 0.5rem;">Contact Us</a>
+            </p>
+        </div>
+    </div>
+</footer>
 
 <script>
 	function toggleMenu() {
 		const nav = document.querySelector('.nav-categories');
 		nav.classList.toggle('active');
 
-		// 点击菜单项后自动关闭
+		// Auto-close after clicking menu items
 		document.querySelectorAll('.nav-category').forEach(item => {
 			item.addEventListener('click', () => {
 				if (window.innerWidth <= 768) {
@@ -341,6 +423,17 @@
 			});
 		});
 	}
+</script>
+<script>
+// Language preference handling (set preference only, no auto redirect)
+(function(){
+    const langSwitch = document.getElementById('lang-switch');
+    if (langSwitch) {
+        langSwitch.addEventListener('click', function(){
+            try { localStorage.setItem('preferred_lang', 'zh'); } catch(_) {}
+        });
+    }
+})();
 </script>
 <script>
 	(function(){
